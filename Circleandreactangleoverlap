@@ -1,0 +1,16 @@
+class Solution {
+public:
+//here condition for a cordinate(i,j) lie on reactangle is x1<=i<=x2,y1<=j<=y2,   and another condition for cordinate lie on circle is 
+//(i-x)^2+(j-y)^2<=radius*radius
+    bool checkOverlap(int radius, int xCenter, int yCenter, int x1, int y1, int x2, int y2) {
+      for(int i=x1;i<=x2;i++){
+        for(int j=y1;j<=y2;j++){
+            int a=i-xCenter;
+            int b=j-yCenter;
+            if(a*a+b*b<=radius*radius)
+            return 1;
+        }
+      }
+      return 0;  
+    }
+};
