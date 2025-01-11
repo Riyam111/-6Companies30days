@@ -1,0 +1,29 @@
+class Solution {
+public:
+//here apply sliding window approch like start from 1 then compare left and right that should be decreasing on both side then it is mountain and change maxi
+//length by current length 
+    int longestMountain(vector<int>& arr) {
+        int n=arr.size();
+        if(n<3)return 0;
+        int maxi=0;
+      for(int i=1;i<n-1;){
+        if(arr[i+1]<arr[i]&&arr[i]>arr[i-1]){
+            int l=i-1;
+            int r=i+1;
+            while(l>0&&arr[l]>arr[l-1]){
+                l--;
+            }
+             while(r<n-1&&arr[r]>arr[r+1]){
+                r++;
+            }
+            int currentlength=r-l+1;
+            maxi=max(maxi,currentlength);
+            i=r;
+        }
+        else{
+            i++;
+        }
+      }
+      return maxi;
+    }
+};
