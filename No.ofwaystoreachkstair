@@ -1,0 +1,29 @@
+class Solution {
+public:
+   
+    // function take the following: 
+    // 1. st => current stair
+    // 2. jump => no. of jumps taken / val of jump var
+    // 3. d => total no. of descending moves taken
+    // 4. f => is Decending allowed
+    int solve(int st, int jump, int d, int f, int k,   vector<vector<vector<int>>>&dp){
+        if(st > k+1) return 0;
+        if(dp[jump][d][f] != -1) return dp[jump][d][f];
+        int ans = 0;
+        //When st == k, it doesn't mean we should immediately return; it just means we found one valid path,
+// so we count it (increment ans) and continue exploring other paths.
+//int jump = 3;
+//int result = 1 << jump; // 1 * 2^3 = 8
+
+        if(st==k) ans++;
+        ans += solve(st+(1<<jump),jump+1,d,1,k,dp);
+        if(f){
+            ans += solve(st-1,jump,d+1,0,k,dp);
+        }
+        return dp[jump][d][f] = ans;
+    }
+    int waysToReachStair(int k) {
+        vector<vector<vector<int>>>dp(32,vector<vector<int>>(32,vector<int>(2,-1)));
+        return solve(1,0,0,1,k,dp);
+    }
+};
